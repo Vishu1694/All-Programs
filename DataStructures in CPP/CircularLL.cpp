@@ -67,12 +67,17 @@ void del() {
 		node* temp1 = temp->link;
 		if(temp1==head) {
 			head=NULL;
-			delete(temp);
+			delete temp;
 			return;
 		}
-		head=temp1;
-		delete(temp);
-		return;
+		while (temp1->link!=temp)
+		{
+			temp1=temp1->link;
+		}
+		temp1->link=temp->link;
+		head=temp->link;
+		delete temp;
+		
 	}
 	else {
 		node* temp = head;
@@ -80,7 +85,8 @@ void del() {
 		while(temp1->link!=head) {
 			if(loc==a) {
 				temp->link = temp1->link;
-				delete(temp1);
+				temp1->link=NULL;
+				delete temp1;
 				return;
 			}
 			temp = temp1;
@@ -88,9 +94,29 @@ void del() {
 			a++;
 		}
 		temp->link=head;
-		delete(temp1);
+		temp1->link=NULL;
+		delete temp1;
 		return;
 	}
+	/*
+	node* temp = head;
+	node* temp1 = temp->link;
+	while(temp1->link!=head){
+		if(loc==a) {
+				temp->link = temp1->link;
+				temp1->link=NULL;
+				delete temp1;
+				return;
+			}
+			temp = temp1;
+			temp1 = temp1->link;
+			a++;
+		}
+		temp->link=head;
+		temp1->link=NULL;
+		delete temp1;
+		return;
+	*/
 }
 
 int main() {
